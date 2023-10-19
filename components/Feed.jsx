@@ -8,6 +8,7 @@ const Feed = () => {
   const [allCoupons, setAllCoupons] = useState([]);
   const [allPrizes, setAllPrizes] = useState([]);
   const [prizeToDraw, setPrizeToDraw] = useState(null);
+  const [isLast, setIsLast] = useState(false);
 
   const fetchCoupons = async () => {
     const response = await fetch("/api/coupons");
@@ -23,7 +24,8 @@ const Feed = () => {
     setAllPrizes(data);
     const filteredPrizes = data.filter((p) => p.maxAttempt !== 0);
     if (data.every((p) => p.maxAttempt === 0)) {
-      setPrizeToDraw(null);
+      setPrizeToDraw(data[data.length - 1]);
+      setIsLast(true);
     } else {
       const prizeToBeDraw = filteredPrizes.reduce((min, current) => {
         return current.order < min.order ? current : min;
@@ -36,8 +38,8 @@ const Feed = () => {
     const luckyCouponNumbers = allCoupons
       .filter((cp) => cp.prize === null)
       .map((cp) => cp.couponNumber);
-    await updateCoupon(luckyCouponNumbers, prizeToDraw._id);
-    await updatePrize(luckyCouponNumbers, prizeToDraw._id);
+    await updateCoupon(luckyCouponNumbers, prizeToDraw?._id);
+    await updatePrize(luckyCouponNumbers, prizeToDraw?._id);
   }, [allCoupons, prizeToDraw]);
 
   useEffect(() => {
@@ -46,10 +48,10 @@ const Feed = () => {
   }, []);
 
   useEffect(() => {
-    if (!!prizeToDraw && prizeToDraw.isFillRemain === true) {
+    if (isLast) {
       changeLatest();
     }
-  }, [prizeToDraw, changeLatest]);
+  }, [isLast, changeLatest]);
 
   const updateCoupon = async (couponNumbers, prize) => {
     try {
@@ -128,7 +130,7 @@ const Feed = () => {
   return (
     <section className="feed">
       <div className="relative w-full flex-center">
-        {!prizeToDraw ? (
+        {isLast ? (
           <h1 className="prompt_card text-3xl text-white fond-semibold">
             Thank you!
           </h1>
