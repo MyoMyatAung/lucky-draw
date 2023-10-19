@@ -16,11 +16,19 @@ const Winners = () => {
           Congradulation lucky winners!
         </span>
       </h1>
-      <div className="mt-4 grid grid-cols-5 gap-4 justify-center">
-        {luckyCoupons.split(",").map((cp, index) => (
-          <CouponCode coupon={cp} key={index} />
-        ))}
-      </div>
+      {luckyCoupons.split(",").length === 1 ? (
+        <div className="flex justify-center w-full my-4">
+          {luckyCoupons.split(",").map((cp, index) => (
+            <CouponCode coupon={cp} key={index} />
+          ))}
+        </div>
+      ) : (
+        <div className="mt-4 grid grid-cols-5 gap-4 justify-center">
+          {luckyCoupons.split(",").map((cp, index) => (
+            <CouponCode coupon={cp} key={index} />
+          ))}
+        </div>
+      )}
 
       <WinnerFeed coupons={luckyCoupons.split(",")} />
     </section>
