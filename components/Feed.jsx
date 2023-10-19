@@ -135,7 +135,7 @@ const Feed = () => {
         ) : (
           <button
             onClick={handleDraw}
-            className="bg-white text-awba-blue shadow-sm text-2xl font-bold px-20 py-4 rounded-lg"
+            className="bg-white text-awba-blue shadow-sm text-2xl font-bold px-20 py-4 rounded-lg mt-6"
           >
             {prizeToDraw?.prize}
           </button>
