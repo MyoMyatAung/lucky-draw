@@ -22,13 +22,13 @@ const Feed = () => {
 
     setAllPrizes(data);
     const filteredPrizes = data.filter((p) => p.maxAttempt !== 0);
-    if (data.every((p) => p.maxAttempt !== 0)) {
+    if (data.every((p) => p.maxAttempt === 0)) {
+      setPrizeToDraw(null);
+    } else {
       const prizeToBeDraw = filteredPrizes.reduce((min, current) => {
         return current.order < min.order ? current : min;
       });
       setPrizeToDraw(prizeToBeDraw);
-    } else {
-      setPrizeToDraw(null);
     }
   };
 
