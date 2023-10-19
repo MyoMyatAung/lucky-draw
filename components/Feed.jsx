@@ -22,17 +22,23 @@ const Feed = () => {
 
     setAllPrizes(data);
     const filteredPrizes = data.filter((p) => p.maxAttempt !== 0);
-    const prizeToBeDraw = filteredPrizes.reduce((min, current) => {
-      return current.order < min.order ? current : min;
-    });
-    setPrizeToDraw(prizeToBeDraw);
+    if (data.every((p) => p.maxAttempt !== 0)) {
+      const prizeToBeDraw = filteredPrizes.reduce((min, current) => {
+        return current.order < min.order ? current : min;
+      });
+      setPrizeToDraw(prizeToBeDraw);
+    } else {
+      setPrizeToDraw(null);
+    }
   };
 
   const changeLatest = useCallback(async () => {
-    const luckyCouponNumbers = allCoupons.filter((cp) => cp.prize === null).map((cp) => cp.couponNumber);
+    const luckyCouponNumbers = allCoupons
+      .filter((cp) => cp.prize === null)
+      .map((cp) => cp.couponNumber);
     await updateCoupon(luckyCouponNumbers, prizeToDraw._id);
     await updatePrize(luckyCouponNumbers, prizeToDraw._id);
-  },[allCoupons, prizeToDraw]);
+  }, [allCoupons, prizeToDraw]);
 
   useEffect(() => {
     fetchCoupons();
@@ -40,10 +46,10 @@ const Feed = () => {
   }, []);
 
   useEffect(() => {
-    if(!!prizeToDraw && prizeToDraw.isFillRemain === true) {
+    if (!!prizeToDraw && prizeToDraw.isFillRemain === true) {
       changeLatest();
     }
-  },[prizeToDraw, changeLatest])
+  }, [prizeToDraw, changeLatest]);
 
   const updateCoupon = async (couponNumbers, prize) => {
     try {
@@ -83,19 +89,21 @@ const Feed = () => {
     } else {
       const randomElements = [];
       const shuffledArray = arr.slice(); // Create a copy of the original array
-  
+
       for (let i = 0; i < n; i++) {
-        const randomIndex = Math.floor(Math.random() * (shuffledArray.length - i));
+        const randomIndex = Math.floor(
+          Math.random() * (shuffledArray.length - i)
+        );
         const selectedElement = shuffledArray[randomIndex];
-  
+
         // Swap the selected element with the last element in the shuffled portion of the array
         const lastIndex = shuffledArray.length - i - 1;
         shuffledArray[randomIndex] = shuffledArray[lastIndex];
         shuffledArray[lastIndex] = selectedElement;
-  
+
         randomElements.push(selectedElement);
       }
-  
+
       return randomElements;
     }
   }
@@ -103,7 +111,10 @@ const Feed = () => {
   const handleDraw = async () => {
     const removedPrizedCoupons = allCoupons.filter((cp) => cp.prize === null);
     const numberToGenerateCoupons = prizeToDraw.attemptCount;
-    const luckyCouponNumbers = getLuckyCouponNumber(removedPrizedCoupons, numberToGenerateCoupons).map((cp) => cp.couponNumber);
+    const luckyCouponNumbers = getLuckyCouponNumber(
+      removedPrizedCoupons,
+      numberToGenerateCoupons
+    ).map((cp) => cp.couponNumber);
     if (!luckyCouponNumbers.length) {
       return;
     }
@@ -117,12 +128,18 @@ const Feed = () => {
   return (
     <section className="feed">
       <div className="relative w-full flex-center">
-        <button
-          onClick={handleDraw}
-          className="bg-white text-awba-blue shadow-sm text-2xl font-bold px-20 py-4 rounded-lg"
-        >
-          {prizeToDraw?.prize}
-        </button>
+        {!prizeToDraw ? (
+          <h1 className="prompt_card text-3xl text-white fond-semibold">
+            Thank you!
+          </h1>
+        ) : (
+          <button
+            onClick={handleDraw}
+            className="bg-white text-awba-blue shadow-sm text-2xl font-bold px-20 py-4 rounded-lg"
+          >
+            {prizeToDraw?.prize}
+          </button>
+        )}
       </div>
     </section>
   );

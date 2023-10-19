@@ -3,7 +3,7 @@ import React from "react";
 
 const Home = () => {
   return (
-    <section className="w-full flex-center flex-col">
+    <section className="w-full flex-center flex-col mt-6">
       <p className="desc text-center">
         <span className="font-bold text-2xl text-white">ပိုးသတ်‌ဆေး</span> နှင့်{" "}
         <span className="font-bold text-2xl text-white">ရွက်ဖျန်းအားဆေး သိန်း၇၅၀ဖိုး</span>{" "}
