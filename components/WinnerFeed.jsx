@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 const CouponCardList = ({ data }) => {
   return (
-    <div className="flex items-center justify-center flex-wrap gap-4 my-2">
+    <div className={data.length === 1? "flex items-center justify-center flex-wrap gap-4 my-2": "grid grid-cols-5 gap-4 my-2 grid-flow-row justify-stretch"}>
       {data.map((coupon) => (
         <CouponCard key={coupon._id} coupon={coupon} />
       ))}

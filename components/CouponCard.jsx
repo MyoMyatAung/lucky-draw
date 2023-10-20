@@ -1,13 +1,25 @@
 import React from "react";
-import { BiSolidUser } from "react-icons/bi";
 
 const CouponCard = ({ coupon }) => {
+
+  function formatNumber(number) {
+    if (number < 10) {
+      return "00" + number;
+    } else if (number < 100) {
+      return "0" + number;
+    } else {
+      return number;
+    }
+  }
+
+  const couponNumber = formatNumber(coupon.couponNumber);
+
   return (
-    <div className="prompt_card flex items-center justify-between gap-2 min-w-fit max-w-fit">
+    <div className="prompt_card flex items-center justify-between gap-2 w-full">
       <div className="flex items-center gap-4">
         <div className="flex flex-col">
           <h3 className="font-satoshi font-semibold text-white">
-            {coupon.couponCustomer}
+            {coupon.couponCustomer} | {couponNumber}
           </h3>
           <p className="font-inter text-xs text-white font-semibold">
             <>{coupon.shop}</> | <>{coupon.city}</>

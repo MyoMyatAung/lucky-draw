@@ -9,6 +9,7 @@ const Feed = () => {
   const [allPrizes, setAllPrizes] = useState([]);
   const [prizeToDraw, setPrizeToDraw] = useState(null);
   const [isLast, setIsLast] = useState(false);
+  const [isFillRemain, setIsFillRemain] = useState(false);
 
   const fetchCoupons = async () => {
     const response = await fetch("/api/coupons");
@@ -24,8 +25,13 @@ const Feed = () => {
     setAllPrizes(data);
     const filteredPrizes = data.filter((p) => p.maxAttempt !== 0);
     if (data.every((p) => p.maxAttempt === 0)) {
+      console.log(data,"LAST")
       setPrizeToDraw(data[data.length - 1]);
       setIsLast(true);
+      const lastPrize = data[data.length - 1];
+      if (lastPrize.isFillRemain) {
+        setIsFillRemain(true);
+      }
     } else {
       const prizeToBeDraw = filteredPrizes.reduce((min, current) => {
         return current.order < min.order ? current : min;
@@ -48,10 +54,13 @@ const Feed = () => {
   }, []);
 
   useEffect(() => {
-    if (isLast) {
+    if (isFillRemain) {
       changeLatest();
     }
-  }, [isLast, changeLatest]);
+    if(isLast) {
+      router.push("/final")
+    }
+  }, [isFillRemain, changeLatest, isLast, router]);
 
   const updateCoupon = async (couponNumbers, prize) => {
     try {

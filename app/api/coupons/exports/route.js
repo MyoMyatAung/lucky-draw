@@ -7,7 +7,7 @@ export const GET = async (request, { params }) => {
   try {
     await connectDb();
 
-    const coupons = await Coupon.find().populate([
+    const coupons = await Coupon.find({ prize: { $ne: null } }).populate([
       { path: "prize", model: Prize, select: "prize" },
     ]);
     const jsonData = JSON.stringify(
