@@ -95,32 +95,38 @@ const Feed = () => {
   };
 
   function getLuckyCouponNumber(arr, n) {
+    console.log(n, arr.length);
     if (n >= arr.length) {
       return arr.slice(); // Return a copy of the entire array
     } else {
       const randomElements = [];
       const shuffledArray = arr.slice(); // Create a copy of the original array
-
+      
       for (let i = 0; i < n; i++) {
         const randomIndex = Math.floor(
           Math.random() * (shuffledArray.length - i)
         );
         const selectedElement = shuffledArray[randomIndex];
-
+        
         // Swap the selected element with the last element in the shuffled portion of the array
         const lastIndex = shuffledArray.length - i - 1;
         shuffledArray[randomIndex] = shuffledArray[lastIndex];
         shuffledArray[lastIndex] = selectedElement;
-
+        
         randomElements.push(selectedElement);
       }
-
+      
+      console.log("RANDOM NUMBERS", randomElements)
       return randomElements;
     }
   }
 
   const handleDraw = async () => {
     const removedPrizedCoupons = allCoupons.filter((cp) => cp.prize === null);
+    console.log(allCoupons.filter((cp) => {
+      console.log(cp);
+      return cp.prize === null;
+    }));
     const numberToGenerateCoupons = prizeToDraw.attemptCount;
     const luckyCouponNumbers = getLuckyCouponNumber(
       removedPrizedCoupons,
