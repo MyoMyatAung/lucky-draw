@@ -1,10 +1,21 @@
 import AnimatedNumbers from "react-animated-numbers";
 
 const CouponCode = ({ coupon }) => {
+
   function formatNumber(number) {
     if (number < 10) {
       return (
         <div className="flex items-center">
+          <AnimatedNumbers
+            animateToNumber={0}
+            fontStyle={{ fontSize: 24 }}
+            configs={[
+              { mass: 1, tension: 100, friction: 200 },
+              { mass: 2, tension: 100, friction: 200 },
+              { mass: 3, tension: 100, friction: 200 },
+              { mass: 4, tension: 100, friction: 200 },
+            ]}
+          ></AnimatedNumbers>
           <AnimatedNumbers
             animateToNumber={0}
             fontStyle={{ fontSize: 24 }}
@@ -51,6 +62,41 @@ const CouponCode = ({ coupon }) => {
             ]}
           ></AnimatedNumbers>
           <AnimatedNumbers
+            animateToNumber={0}
+            fontStyle={{ fontSize: 24 }}
+            configs={[
+              { mass: 1, tension: 100, friction: 200 },
+              { mass: 2, tension: 100, friction: 200 },
+              { mass: 3, tension: 100, friction: 200 },
+              { mass: 4, tension: 100, friction: 200 },
+            ]}
+          ></AnimatedNumbers>
+          <AnimatedNumbers
+            animateToNumber={number}
+            fontStyle={{ fontSize: 24 }}
+            configs={[
+              { mass: 1, tension: 100, friction: 200 },
+              { mass: 2, tension: 100, friction: 200 },
+              { mass: 3, tension: 100, friction: 200 },
+              { mass: 4, tension: 100, friction: 200 },
+            ]}
+          ></AnimatedNumbers>
+        </div>
+      );
+    } else if (number < 1000) {
+      return (
+        <div className="flex items center">
+          <AnimatedNumbers
+            animateToNumber={0}
+            fontStyle={{ fontSize: 24 }}
+            configs={[
+              { mass: 1, tension: 100, friction: 200 },
+              { mass: 2, tension: 100, friction: 200 },
+              { mass: 3, tension: 100, friction: 200 },
+              { mass: 4, tension: 100, friction: 200 },
+            ]}
+          ></AnimatedNumbers>
+          <AnimatedNumbers
             animateToNumber={number}
             fontStyle={{ fontSize: 24 }}
             configs={[
@@ -77,6 +123,83 @@ const CouponCode = ({ coupon }) => {
       );
     }
   }
+
+  // function formatNumber(number) {
+  //   if (number < 10) {
+  //     return (
+  //       <div className="flex items-center">
+  //         <AnimatedNumbers
+  //           animateToNumber={0}
+  //           fontStyle={{ fontSize: 24 }}
+  //           configs={[
+  //             { mass: 1, tension: 100, friction: 200 },
+  //             { mass: 2, tension: 100, friction: 200 },
+  //             { mass: 3, tension: 100, friction: 200 },
+  //             { mass: 4, tension: 100, friction: 200 },
+  //           ]}
+  //         ></AnimatedNumbers>
+  //         <AnimatedNumbers
+  //           animateToNumber={0}
+  //           fontStyle={{ fontSize: 24 }}
+  //           configs={[
+  //             { mass: 1, tension: 100, friction: 200 },
+  //             { mass: 2, tension: 100, friction: 200 },
+  //             { mass: 3, tension: 100, friction: 200 },
+  //             { mass: 4, tension: 100, friction: 200 },
+  //           ]}
+  //         ></AnimatedNumbers>
+  //         <AnimatedNumbers
+  //           animateToNumber={number}
+  //           fontStyle={{ fontSize: 24 }}
+  //           configs={[
+  //             { mass: 1, tension: 100, friction: 200 },
+  //             { mass: 2, tension: 100, friction: 200 },
+  //             { mass: 3, tension: 100, friction: 200 },
+  //             { mass: 4, tension: 100, friction: 200 },
+  //           ]}
+  //         ></AnimatedNumbers>
+  //       </div>
+  //     );
+  //   } else if (number < 100) {
+  //     return (
+  //       <div className="flex items center">
+  //         <AnimatedNumbers
+  //           animateToNumber={0}
+  //           fontStyle={{ fontSize: 24 }}
+  //           configs={[
+  //             { mass: 1, tension: 100, friction: 200 },
+  //             { mass: 2, tension: 100, friction: 200 },
+  //             { mass: 3, tension: 100, friction: 200 },
+  //             { mass: 4, tension: 100, friction: 200 },
+  //           ]}
+  //         ></AnimatedNumbers>
+  //         <AnimatedNumbers
+  //           animateToNumber={number}
+  //           fontStyle={{ fontSize: 24 }}
+  //           configs={[
+  //             { mass: 1, tension: 100, friction: 200 },
+  //             { mass: 2, tension: 100, friction: 200 },
+  //             { mass: 3, tension: 100, friction: 200 },
+  //             { mass: 4, tension: 100, friction: 200 },
+  //           ]}
+  //         ></AnimatedNumbers>
+  //       </div>
+  //     );
+  //   } else {
+  //     return (
+  //       <AnimatedNumbers
+  //         animateToNumber={number}
+  //         fontStyle={{ fontSize: 24 }}
+  //         configs={[
+  //           { mass: 1, tension: 100, friction: 200 },
+  //           { mass: 2, tension: 100, friction: 200 },
+  //           { mass: 3, tension: 100, friction: 200 },
+  //           { mass: 4, tension: 100, friction: 200 },
+  //         ]}
+  //       ></AnimatedNumbers>
+  //     );
+  //   }
+  // }
 
   const number = formatNumber(Number(coupon));
 

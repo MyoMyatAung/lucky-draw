@@ -3,10 +3,22 @@ import Prize from "@/models/prize";
 import { connectDb } from "@/utils/database";
 import { generateCSV } from "@/utils/json2csv";
 
+// function formatNumber(number) {
+//   if (number < 10) {
+//     return "00" + number;
+//   } else if (number < 100) {
+//     return "0" + number;
+//   } else {
+//     return number;
+//   }
+// }
+
 function formatNumber(number) {
   if (number < 10) {
-    return "00" + number;
+    return "000" + number;
   } else if (number < 100) {
+    return "00" + number;
+  } else if(number < 1000){
     return "0" + number;
   } else {
     return number;

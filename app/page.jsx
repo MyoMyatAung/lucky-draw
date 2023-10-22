@@ -16,11 +16,11 @@ const Home = () => {
           ဝယ်ယူသူတိုင်းအတွက်
         </p>
         <h1 className="font-bold text-4xl mt-4 text-center">
-          <span className="text-white text-center">ဗလာမပါ</span>
+          {/* <span className="text-white text-center">ဗလာမပါ</span> */}
         </h1>
         <h1 className="font-bold text-4xl mt-4 mb-4 text-center">
-          <span className="text-white">ရွှေကံစမ်းမဲအစီအစဥ်</span>
-          {/* <span className="text-gold">ရွှေကံစမ်းမဲအစီအစဥ်</span> */}
+          {/* <span className="text-white">ရွှေသားကံစမ်းမဲအစီအစဥ်</span> */}
+          <span className="text-white">ငွေသားကံစမ်းမဲအစီအစဥ်</span>
         </h1>
 
         <Feed />
